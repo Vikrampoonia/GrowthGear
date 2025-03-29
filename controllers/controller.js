@@ -1,5 +1,5 @@
-import executeQuery from '../dataBase/mockDB.js';
-import {processUserQuery,getQueryCategory,getTableColumnName,getTableName} from '../dataBase/queryConvert.js';
+import executeQuery from '../data/mockDB.js';
+import {processUserQuery,getQueryCategory,getTableColumnName,getTableName} from '../data/queryConvert.js';
 
 
 
