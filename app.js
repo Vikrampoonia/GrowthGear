@@ -14,7 +14,6 @@ app.use(cors())
 //Implement lightweight authentication
 
 app.get("/", async (req, res) => {
-    return 'hello';
     res.json({
       message: "Use /query, /explain, /validate endpoints to see result"
     });
