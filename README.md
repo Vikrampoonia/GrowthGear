@@ -1,7 +1,7 @@
 # GrowthGear - Mini Data Query Simulation Engine
 
 ## 🚀 Deployment Link
-_(Add your deployment link here)_
+[_(Click here)_](https://growthgear-coral.vercel.app)
 
 ---
 
