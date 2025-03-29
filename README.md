@@ -1,80 +1,153 @@
-#deployment link:
+# GrowthGear - Mini Data Query Simulation Engine
 
+## 🚀 Deployment Link
+_(Add your deployment link here)_
 
-#Set up instruction
-1. download node from https://nodejs.org/en/download
-2. make clone using this git clone https://github.com/Vikrampoonia/GrowthGear.git
-3. run npm i for install all dependency
-4. run npm run dev in terminal and server start to running
+---
 
-#Folder Structure
-app.js //main file
-/controllers/controller.js   // for logic computation
-/dataBase/mockDB.js   // for dataBase in JSON file
-/dataBase/queryConvert.js   //for conversion of nlp to sql
-/middlewares/auth.js   //for authentication
-package.json
-package-lock.json
+## 📌 Setup Instructions
 
+1. **Install Node.js** from [Node.js Official Website](https://nodejs.org/en/download).
+2. **Clone the repository:**
+   ```sh
+   git clone https://github.com/Vikrampoonia/GrowthGear.git
+   ```
+3. **Navigate into the project directory:**
+   ```sh
+   cd GrowthGear
+   ```
+4. **Install dependencies:**
+   ```sh
+   npm install
+   ```
+5. **Start the server:**
+   ```sh
+   npm run dev
+   ```
+   The server will start running on `http://localhost:PORT`.
 
-#MockDB
-Table name are:
-1: users 2: orders 3: products
+---
 
-Column name in users table:
-1: id(INT) 2: name(VARCHAR) 3: email(VARCHAR) 4: spending(INT) 5:created_At(Date)
-Column name in orders table:
-1: id(INT) 2: user_id(INT) 3: status(VARCHAR) 4: amount(INT) 5:date(Date)
+## 📂 Folder Structure
+```
+GrowthGear/
+│── app.js                     # Main entry point
+│── package.json                # Project dependencies
+│── package-lock.json           # Lock file
+│
+├── controllers/
+│   ├── controller.js           # Handles query logic
+│
+├── dataBase/
+│   ├── mockDB.js               # JSON-based database
+│   ├── queryConvert.js         # Converts NLP to SQL
+│
+├── middlewares/
+│   ├── auth.js                 # Authentication middleware
+```
 
-Column name in products table:
-1: id(INT) 2: name(VARCHAR) 3: category(VARCHAR) 4: price(INT) 
+---
 
-#Query endpoints
-1)/query:
-method:GET
-json data: {"query":"Write your query here"}
-Controller:queryController
-How it compute:
-a) it send to queryFeasibilityController that validate query 
-b) if query valid then send to processUserQuery function. It help to convert simple nlp query to sql query
-c) last executeQuery function call and it take sql query as parameter and returning data from mockDB data
+## 📦 MockDB Structure
+This project uses a JSON-based database (`mockDB.js`) with the following tables:
 
-response sent in json format:
-{
-"query": input query,
-        "sqlQuery": converted sql query ,
-        "feasibility": result in feasibility,
-        "data": result fetch from mockDB, 
-        "error": null or any error
-}
+### 🟢 Users Table
+| Column Name  | Data Type  |
+|-------------|-----------|
+| `id`        | INT       |
+| `name`      | VARCHAR   |
+| `email`     | VARCHAR   |
+| `spending`  | INT       |
+| `created_At` | DATE      |
 
+### 🟠 Orders Table
+| Column Name | Data Type  |
+|------------|-----------|
+| `id`       | INT       |
+| `user_id`  | INT       |
+| `status`   | VARCHAR   |
+| `amount`   | INT       |
+| `date`     | DATE      |
 
-2)/explain:
-method:GET
-json data:{"query":"Write your query here"}
-Controller:queryBreakDownController
-How it compute:
-predefined steps already mention in array
+### 🔵 Products Table
+| Column Name | Data Type  |
+|------------|-----------|
+| `id`       | INT       |
+| `name`     | VARCHAR   |
+| `category` | VARCHAR   |
+| `price`    | INT       |
 
-response sent in json format:
-{"query": query, //user query 
-"breakdown": steps //predefined array of steps
-}
+---
 
-3)/validate
-method:GET
-json data:{"query":"Write your query here"}
-Controller:queryFeasibilityController
-how it compute:
-it help processUserQuery function to check that query can be converted to sql or not
+## 📡 API Endpoints
 
-response sent in json format:
-{
-valid: true/false  //if can be convert to sql
-sql:sqlQuery
-message: "query convert or not"
-}
+### **1️⃣ `/query` - Process Natural Language Query**
+- **Method:** `GET`
+- **Request Body (JSON):**
+  ```json
+  { "query": "Write your query here" }
+  ```
+- **Controller:** `queryController`
+- **How it Works:**
+  1. `queryFeasibilityController` checks if the query is valid.
+  2. If valid, `processUserQuery` converts it to an SQL query.
+  3. `executeQuery` fetches data from `mockDB.js`.
 
-#query examples
-1) show all users
-2) show all products
+- **Response Format:**
+  ```json
+  {
+    "query": "show all users",
+    "sqlQuery": "SELECT * FROM users",
+    "feasibility": true,
+    "data": [...],
+    "error": null
+  }
+  ```
+
+---
+
+### **2️⃣ `/explain` - Query Breakdown**
+- **Method:** `GET`
+- **Request Body (JSON):**
+  ```json
+  { "query": "Write your query here" }
+  ```
+- **Controller:** `queryBreakDownController`
+- **Response Format:**
+  ```json
+  {
+    "query": "show all users",
+    "breakdown": ["Step 1: Identify table", "Step 2: Fetch data", "Step 3: Return response"]
+  }
+  ```
+
+---
+
+### **3️⃣ `/validate` - Check Query Feasibility**
+- **Method:** `GET`
+- **Request Body (JSON):**
+  ```json
+  { "query": "Write your query here" }
+  ```
+- **Controller:** `queryFeasibilityController`
+- **Response Format:**
+  ```json
+  {
+    "valid": true,
+    "sql": "SELECT * FROM users",
+    "message": "Query can be converted to SQL"
+  }
+  ```
+
+---
+
+## 📝 Example Queries
+- **"show all users"** → `SELECT * FROM users`
+- **"show all products"** → `SELECT * FROM products`
+- **"Get orders where amount > 500"** → `SELECT * FROM orders WHERE amount > 500`
+
+---
+
+## 📜 License
+_(Add license details if applicable)_
+
