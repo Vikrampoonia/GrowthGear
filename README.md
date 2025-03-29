@@ -148,6 +148,4 @@ This project uses a JSON-based database (`mockDB.js`) with the following tables:
 
 ---
 
-## 📜 License
-_(Add license details if applicable)_
 
